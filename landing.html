@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Suno Downloader · Export Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="landing.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="pill">Archival-grade Suno exports</p>
+          <h1>Archive & create provenance in one click.</h1>
+          <p class="lede">
+            Suno Downloader mirrors your complete Studio library, layers filters like +Owned & Personas, and builds a provenance bundle for every clip before you can say “dial in a batch”.
+          </p>
+          <div class="cta-row">
+            <a class="cta primary" href="#download">Download macOS / Windows</a>
+            <a class="cta ghost" href="#demo">See it in action</a>
+          </div>
+          <ul class="hero-highlights">
+            <li>1,000 free imports · 20 free WAV renders</li>
+            <li>Stripe unlock for unlimited archives & WAV mastering</li>
+            <li>Radial-animated console that matches your Studio muscle memory</li>
+          </ul>
+        </div>
+        <div class="hero-card">
+          <div class="avatar-block">
+            <img src="Screenshot 2025-11-06 at 4.13.02 PM.png" alt="App preview" />
+          </div>
+          <div class="hero-card__body">
+            <p class="eyebrow">Live Export Console</p>
+            <h3>Queue every filter. Export while Suno still generates.</h3>
+            <p>
+              Parallel queueing starts as soon as the first page lands, so you aren’t waiting on 17K clips before the downloads flow.
+            </p>
+            <div class="stat-grid">
+              <div>
+                <span class="stat">17,241</span>
+                <span class="label">Clips mirrored</span>
+              </div>
+              <div>
+                <span class="stat">4×</span>
+                <span class="label">Faster exports</span>
+              </div>
+              <div>
+                <span class="stat">0</span>
+                <span class="label">Missed avatars</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="section" id="features">
+        <div class="section-head">
+          <p class="pill">Why producers switch</p>
+          <h2>Fast queueing, clean provenance, luxe UI.</h2>
+        </div>
+        <div class="feature-grid">
+          <article>
+            <h3>Studio-perfect filters</h3>
+            <p>
+              Toggle Liked, Stems, Non-Commercial, +Owned, Personas, Covers and more with multi-select chips that mirror the Studio tray.
+            </p>
+          </article>
+          <article>
+            <h3>Parallel exporting</h3>
+            <p>
+              Queue begins processing as soon as page one lands. The status grid animates through a 2×2 film strip so you always see progress.
+            </p>
+          </article>
+          <article>
+            <h3>WAV mastering built in</h3>
+            <p>
+              Run matchering with our reference master to transform Suno MP3s into 48 kHz WAVs. Unlock unlimited renders via the Stripe paywall.
+            </p>
+          </article>
+          <article>
+            <h3>Cache + provenance</h3>
+            <p>
+              First full pull is cached locally, then we only fetch deltas. Every clip gets TXT notes, sidecar JSON, tagged MP3, and cover art.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split" id="analysis">
+        <div>
+          <p class="pill">Analysis of Platform WAV Conversion & Our Enhancement Process</p>
+          <h2>We proved the Suno's WAV is a dressed-up MP3 — then built something better.</h2>
+          <p>
+            Spectrogram sweeps showed the Suno's “WAV” stops cold at ~16 kHz, then overlays faint synthetic highs to fake resolution. We rebuilt the pipeline so the highs are real, not painted on.
+          </p>
+          <ol class="list numbered">
+            <li><strong>Signal Analysis:</strong> Compared MP3 vs. WAV spectrograms and confirmed identical base data with a 16 kHz shelf.</li>
+            <li><strong>Warp-Fill Reconstruction:</strong> Mirrored the 12–16 kHz harmonics upward with adaptive smoothing to 20 kHz.</li>
+            <li><strong>Precision Mastering:</strong> Ran the restored file through Matchering with <code>reference_master.wav</code> at −14 LUFS.</li>
+            <li><strong>QA & Delivery:</strong> Normalized loudness, kept true 48 kHz / 16-bit fidelity, and validated the new spectrum.</li>
+          </ol>
+          <p>
+            Result: the Suno Savvy WAV restores authentic “air,” maintains stereo depth, and outperforms Suno’s pseudo-WAV in both spectral integrity and perception.
+          </p>
+        </div>
+        <div class="card spectral">
+          <p class="eyebrow">Spectral evidence</p>
+          <div class="carousel" data-carousel>
+            <button class="carousel-btn prev" aria-label="Previous screenshot">‹</button>
+            <div class="carousel-track">
+              <figure class="image-card" data-slide>
+                <img src="mp3.png" alt="MP3 spectrogram" />
+                <figcaption>Original MP3 · 16 kHz shelf</figcaption>
+              </figure>
+              <figure class="image-card" data-slide>
+                <img src="suno-wav.png" alt="Platform WAV spectrogram" />
+                <figcaption>Platform WAV · synthetic haze</figcaption>
+              </figure>
+              <figure class="image-card highlight" data-slide>
+                <img src="sunosavvy-wav.png" alt="Our Suno Savvy WAV spectrogram" />
+                <figcaption>Suno Savvy WAV · true high-band detail</figcaption>
+              </figure>
+            </div>
+            <button class="carousel-btn next" aria-label="Next screenshot">›</button>
+            <div class="carousel-dots" aria-label="Spectral comparison navigation"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section downloads" id="download">
+        <div class="section-head">
+          <p class="pill">Download</p>
+          <h2>Grab the latest build.</h2>
+          <p>Universal installer bundles the Electron app with ffmpeg + Python WAV helper.</p>
+        </div>
+        <div class="download-grid">
+          <a class="download-card" href="https://example.com/SunoDownloader-mac.dmg">
+            <h3>macOS</h3>
+            <p>Apple Silicon + Intel · notarized DMG</p>
+            <span>Download .dmg</span>
+          </a>
+          <a class="download-card" href="https://example.com/SunoDownloader-win.exe">
+            <h3>Windows</h3>
+            <p>Win 10/11 · signed installer</p>
+            <span>Download .exe</span>
+          </a>
+          <a class="download-card" href="https://example.com/SunoDownloader-linux.AppImage">
+            <h3>Linux</h3>
+            <p>AppImage + CLI mastering script</p>
+            <span>Download .AppImage</span>
+          </a>
+        </div>
+      </section>
+
+      <footer>
+        <div>
+          <strong>Suno Downloader</strong>
+          <p>Built for producers who need provenance, not chaos.</p>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:support@sunodownloader.app">Support</a>
+          <a href="https://stripe.com">Payments via Stripe</a>
+          <a href="https://github.com">GitHub</a>
+        </div>
+      </footer>
+    </div>
+    <script>
+      document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+        const track = carousel.querySelector('.carousel-track');
+        const slides = Array.from(track.querySelectorAll('[data-slide]'));
+        const dotsWrap = carousel.querySelector('.carousel-dots');
+        let index = 0;
+
+        const update = () => {
+          track.style.transform = `translateX(-${index * 100}%)`;
+          dotsWrap.querySelectorAll('button').forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === index);
+          });
+        };
+
+        slides.forEach((_slide, idx) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.setAttribute('aria-label', `Go to slide ${idx + 1}`);
+          dot.addEventListener('click', () => {
+            index = idx;
+            update();
+          });
+          dotsWrap.appendChild(dot);
+        });
+
+        carousel.querySelector('.carousel-btn.prev').addEventListener('click', () => {
+          index = (index - 1 + slides.length) % slides.length;
+          update();
+        });
+        carousel.querySelector('.carousel-btn.next').addEventListener('click', () => {
+          index = (index + 1) % slides.length;
+          update();
+        });
+
+        update();
+      });
+    </script>
+  </body>
+</html>

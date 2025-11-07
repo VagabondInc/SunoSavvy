@@ -5,229 +5,229 @@ import { useEffect } from 'react';
 
 const GUMROAD_URL = 'https://sunoaio.gumroad.com/l/downloader';
 
+const featureTexts = [
+  {
+    title: 'Studio-perfect filters',
+    body: 'Toggle Liked, Stems, Non-Commercial, +Owned, Personas, Covers and more with multi-select chips that mirror the Studio tray.'
+  },
+  {
+    title: 'Parallel exporting',
+    body: 'Queue begins processing as soon as page one lands. The status grid animates through a 2×2 film strip so you always see progress.'
+  },
+  {
+    title: 'Cache + provenance',
+    body: 'First full pull is cached locally, then we only fetch deltas. Every clip gets TXT notes, sidecar JSON, tagged MP3, and cover art.'
+  }
+];
+
+const analysisParagraphs = [
+  "I knew we had to grab the .WAV files for your songs but the time it takes on Suno is a pain in the ass so, it got me thinking, why does it take so long on Suno in the first place? It's not because they have to summon the magical .WAV fairies from a distant .WAV warehouse to go fetch your .WAV's. It's because they're taking the MP3 and turning it into a .WAV, and if you know anything about audio, that's not good. MP3's are compressed and they lose a lot of data. Anything above 16,000 Hz is pretty much gone forever. Suno did try to make it seem like they're giving you a quality .WAV file, but it's artificial and not even artificial intelligence. I can't blame them though because most other platforms that offer .WAV downloads do the exact same thing. So it's not new. If you've downloaded a .WAV from Suno, then you know the size difference is pretty drastic. For them to store 45 billion 75mb files is a lot different than storing 45 billion 3mb files. So instead of scratching my head or beating it against the wall, trying to download all of the songs in the Suno .WAV format, I figured we could do it better than Suno. And that's exactly what we did!",
+  "The image above is the original MP3 file downloaded from Suno. Below, are the two images of the resampled .WAV's. The one on the left is Suno's, and the one on the right, is our .WAV file. You can see how much cleaner ours is above the 16,000 Hz shelf. Don't believe me? Try for yourself.",
+  'These Spectrogram sweeps showed Suno\'s “WAV” stops cold at ~16 kHz, then overlays faint synthetic highs to fake resolution. We rebuilt the pipeline so the highs are real, not painted on.'
+];
+
+const analysisSteps = [
+  'Signal Analysis: Compared MP3 vs. WAV spectrograms and confirmed identical base data with a 16 kHz shelf.',
+  'Warp-Fill Reconstruction: Used an algorithm that "Healed" the 12–16 kHz harmonics upward with adaptive smoothing to 20 kHz performed in the STFT domain with phase mapping.',
+  'Precision Mastering: Ran the restored file through one of the best open source mastering tools, Matchering, and we use a genre-tuned fine tuned sample as our reference to master the track to -14 LUFS, the standard for streaming platforms like Spotify.',
+  'QA & Delivery: Normalized loudness, kept true 48 kHz / 16-bit fidelity, and validated the new spectrum and enhanced the psychoacoustic feel.'
+];
+
+const provenanceItems = [
+  'A public JSON-LD record for the track (schema.org/MusicRecording) with a clear AI-use disclosure plus checksums and a provenance URL—searchable, linkable, and future-proof.',
+  'Embedded WAV/BWF metadata (inside the master WAV): bext (Description, Originator, OriginatorReference, dates, CodingHistory, optional UMID, loudness fields), iXML (NOTE, FILE_UID), and optional aXML/EBUCore with structured human/AI roles and a pointer to your provenance page.',
+  'MP3/ID3 credits mapped to standard frames (TIT2, TPE1, TALB, TSRC, etc.) plus short COMM and TXXXfields for AI_Involvement, Provenance_URL, and toolchain—so distributors and players can read it.',
+  'Cryptographic integrity proofs: file SHA-256 for each deliverable, audio-stream SHA-256 (container-agnostic) for MP3/MP4/WAV, and BWF audio-data MD5 inside the WAV. These let anyone confirm “same audio” even after remuxing.',
+  'Reproducible loudness notes (LUFS/LRA/True Peak) using EBU R128 loudnorm, captured in the sidecar and shown on the page.',
+  'Immutable storage IDs: S3 Object-Lock VersionID for each master and optional IPFS CIDv1—published on the track page.',
+  'Platform-ready disclosure blurbs (Spotify/DistroKid, Bandcamp, YouTube, SoundCloud) that mirror the above in plain language.'
+];
+
+const importanceItems = [
+  'Compliance & trust: Streaming platforms are rolling out AI-use disclosures and spam filters; clear credits + structured fields help you avoid false positives and keep releases live.',
+  'Chain-of-custody: Hashes (file + stream) and the embedded BWF MD5 give you verifiable lineage across re-encodes, remuxes, and distributor pipelines.',
+  'Reproducibility: Publishing how loudness was measured makes QC disagreements boring—anyone can re-run the command and match the numbers.',
+  'Immutability: S3 Object Lock and IPFS CIDs make your “golden master” a fixed point in time; if anything changes, the IDs change. That’s tamper-evidence for your catalog.',
+  'DDEX-friendly metadata hygiene: Using standard chunks/frames (bext/iXML/aXML; ID3) means distributors, archivists, and search engines can actually consume your credits and disclosures.'
+];
+
+const tldrParagraphs = [
+  'Because you deserve to keep what you create, and to hear it in its truest form. In the current turbulent climate of the AI music world, nothing feels guaranteed. Platforms rise fast and disappear just as quickly, and I’d hate for what happened to so many UDIO users to ever happen again. All that work, emotion, time, and creative energy... gone overnight.',
+  'That’s why I built SunoSavvy. It’s not just a downloader. It’s a safeguard for your art. It restores clarity, depth, and detail Suno compress away, giving you full-quality masters you actually own.',
+  'Our hearts are with you, UDIO users. I can’t imagine how that felt. I’m just sorry I didn’t release this sooner.'
+];
+
 export default function HomePage() {
   useScrollMicroFx();
 
   return (
-    <div>
+    <div className="page">
       <div className="background-orbit" aria-hidden="true" />
       <div className="background-gradient" aria-hidden="true" />
 
-      <header className="site-nav" data-animate="fade">
-        <a className="brand" href="#top">
-          <Image src="/app-icon.jpeg" alt="SunoSavvy icon" width={32} height={32} className="brand-image" priority />
-          <span>SunoSavvy</span>
-        </a>
-        <nav>
-          <a href="#features">Filters</a>
-          <a href="#analysis">WAV Lab</a>
-          <a href="#provenance">Provenance</a>
-          <a href="#story">Story</a>
-        </nav>
-        <a className="cta primary" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
-          Buy on Gumroad
-        </a>
-        <span className="nav-progress" aria-hidden="true" />
-      </header>
-
-      <main id="top">
-        <section className="hero" data-animate="rise">
+      <main className="page-shell">
+        <section className="hero" data-scroll="rise" id="top">
           <div className="hero-copy">
-            <p className="pill">Archival-grade exports</p>
-            <h1>Keep every Suno stem, with Apple-level polish.</h1>
+            <p className="eyebrow">SunoSavvy · Archive & Provenance</p>
+            <h1>Archive & create provenance in one click.</h1>
             <p className="lede">
-              SunoSavvy mirrors your entire Studio library, layers +Owned, Personas, Covers and Stems filters, and ships provenance bundles
-              before Suno even finishes generating. It feels like something Apple would ship, because that is the bar.
+              Suno Downloader mirrors your complete Studio library, layers filters like +Owned & Personas, and builds a provenance bundle for every clip before you can say “dial in a batch”.
             </p>
+            <div className="price-pill">
+              <span className="price-label">Free</span>
+              <span className="price-note">Name a fair price: $0+</span>
+            </div>
+            <p className="inventory">Limited availability · 100 left</p>
             <div className="cta-row">
               <a className="cta primary" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
-                Buy once · $49
+                I want this!
               </a>
-              <a className="cta ghost" href="#analysis">
-                See the WAV proof
-              </a>
+              <p className="cta-note">SunoSavvy Archive &amp; Provenance + .WAV&#39;s Better than Suno&#39;s</p>
             </div>
-            <ul className="hero-highlights">
-              <li>1,000 free imports + 20 complimentary WAV renders</li>
-              <li>Stripe unlock → unlimited archives & mastering</li>
-              <li>Designed for zero-admin hosting on Vercel or Bryce servers</li>
-            </ul>
+            <p className="seller">Created by Tyler Jay</p>
           </div>
-          <div className="hero-device" data-tilt>
-            <figure>
-              <Image src="/suno-wav.png" alt="SunoSavvy export console" width={1200} height={880} className="media" priority />
-              <figcaption>Live Export Console · Parallel queueing · Spectral status grid</figcaption>
-            </figure>
-            <div className="device-card">
-              <div>
-                <span className="eyebrow">Realtime queue</span>
-                <h3>17,241 clips mirrored</h3>
-                <p>Queue begins the second page one lands, so you are never stuck waiting on 17K clips before downloads flow.</p>
-              </div>
-              <dl className="stat-grid">
-                <div>
-                  <dt>4× faster</dt>
-                  <dd>Exports vs. manual pulls</dd>
-                </div>
-                <div>
-                  <dt>0 misses</dt>
-                  <dd>Avatars & credits</dd>
-                </div>
-                <div>
-                  <dt>48 kHz</dt>
-                  <dd>Mastered WAV output</dd>
-                </div>
-              </dl>
-            </div>
-          </div>
-        </section>
-
-        <section className="section feature-showcase" id="features" data-animate="fade">
-          <div className="section-head">
-            <p className="pill">Why producers switch</p>
-            <h2>Fast queueing, clean provenance, luxe UI.</h2>
-            <p>Every interaction mirrors Suno muscle memory—faster, safer, and obsessively detailed.</p>
-          </div>
-          <div className="feature-grid">
-            <article>
-              <h3>Studio-perfect filters</h3>
-              <p>Toggle Liked, Stems, Non-Commercial, +Owned, Personas, Covers, and more with multi-select chips that match the Studio tray.</p>
-            </article>
-            <article>
-              <h3>Parallel exporting</h3>
-              <p>Queue starts processing instantly. The animated 2×2 film strip keeps you current on download status without leaving the console.</p>
-            </article>
-            <article>
-              <h3>Cache + provenance</h3>
-              <p>First pull caches locally, then only deltas fetch. Every clip gets TXT notes, JSON, tagged MP3, WAV, cover art, and checksums.</p>
-            </article>
-            <article>
-              <h3>WAV mastering built in</h3>
-              <p>Matchering with our reference master reconstructs 12–20 kHz detail so your WAVs are real, not reskinned MP3s.</p>
-            </article>
-          </div>
-        </section>
-
-        <section className="section split spectral" id="analysis" data-animate="slide">
-          <div className="spectral-copy">
-            <p className="pill">WAV Lab</p>
-            <h2>We proved Suno&apos;s WAV is a resampled MP3 and fixed it.</h2>
+          <div className="price-card" data-tilt>
+            <p className="eyebrow">Instant digital download</p>
+            <h3>Keep what you create.</h3>
             <p>
-              Spectrogram sweeps showed Suno&apos;s WAV stops cold at ~16 kHz then paints synthetic highs. Our pipeline rebuilds harmonics, holds 48 kHz
-              resolution, and documents every change.
+              Download once, keep every stem, and ship provenance proof alongside restored 48 kHz masters. Gumroad handles the unlock; SunoSavvy handles the archive.
             </p>
-            <ul className="list">
-              <li>Signal analysis confirms identical base data with a 16 kHz shelf.</li>
-              <li>Warp-Fill reconstruction heals 12–16 kHz harmonics up to 20 kHz.</li>
-              <li>Side-by-side visuals reveal the difference instantly—try it yourself.</li>
-            </ul>
             <a className="cta ghost" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
-              Download proof pack
+              Open Gumroad
             </a>
           </div>
-          <div className="spectral-lab" data-parallax>
-            <figure>
-              <Image src="/mp3.png" alt="Original Suno MP3 spectrogram" width={1200} height={720} className="media" />
-              <figcaption>Original Suno MP3</figcaption>
-            </figure>
-            <figure>
-              <Image src="/sunosavvy-wav.png" alt="SunoSavvy mastered WAV" width={1200} height={720} className="media" />
-              <figcaption>SunoSavvy master · clean 20 kHz shelf</figcaption>
-            </figure>
-          </div>
         </section>
 
-        <section className="section provenance" id="provenance" data-animate="rise">
+        <section className="section feature-stack" id="features" data-scroll="fade">
           <div className="section-head">
-            <p className="pill">Provenance bundle</p>
-            <h2>Chain-of-custody tools artists can trust.</h2>
-            <p>Exports ship with metadata that keeps distributors, collectors, and future you aligned on what is AI-assisted and what is original.</p>
+            <h2>Fast queueing, clean provenance, luxe UI.</h2>
           </div>
-          <div className="provenance-grid">
-            <article>
-              <h3>JSON-LD records</h3>
-              <p>schema.org/MusicRecording entries publish AI disclosures, checksums, and provenance URLs for every track.</p>
-            </article>
-            <article>
-              <h3>Embedded metadata</h3>
-              <p>BWF bext + iXML + ID3 fields capture credits, coding history, loudness stats, and SunoSavvy toolchain data.</p>
-            </article>
-            <article>
-              <h3>Integrity proofs</h3>
-              <p>File SHA-256, audio-stream hashes, and BWF MD5 provide verifiable lineage across re-encodes and distributors.</p>
-            </article>
-            <article>
-              <h3>Immutable storage IDs</h3>
-              <p>S3 Object-Lock version IDs plus optional IPFS CIDv1 keep your golden masters tamper-evident.</p>
-            </article>
-            <article>
-              <h3>DDEX-friendly hygiene</h3>
-              <p>Standard chunks ensure Spotify, Bandcamp, and SoundCloud ingest your disclosures without false positives.</p>
-            </article>
-            <article>
-              <h3>Platform blurbs</h3>
-              <p>Auto-generated compliance snippets for Spotify, DistroKid, YouTube, and more keep releases live.</p>
-            </article>
+          <div className="feature-layout">
+            <div className="feature-grid">
+              {featureTexts.map((feature) => (
+                <article key={feature.title} className="feature-card">
+                  <h3>{feature.title}</h3>
+                  <p>{feature.body}</p>
+                </article>
+              ))}
+            </div>
+            <figure className="image-frame">
+              <Image src="/gumroad-filters.png" alt="Studio-perfect filters screenshot" width={1400} height={990} className="media" priority />
+            </figure>
           </div>
         </section>
 
-        <section className="section story" id="story" data-animate="fade">
-          <div className="section-head">
-            <p className="pill">TL;DR Why SunoSavvy?</p>
-            <h2>You deserve to keep what you create.</h2>
+        <section className="section split" data-scroll="slide">
+          <div className="text-stack">
+            <h3>Queue every filter. Export while Suno still generates.</h3>
+            <p>Parallel queueing starts as soon as the first page lands, so you aren’t waiting on 17K clips before the downloads flow.</p>
           </div>
-          <div className="story-grid">
-            <article>
-              <h3>Built after watching UDIO vanish</h3>
-              <p>Platforms rise and disappear overnight. SunoSavvy safeguards your art so you never lose your own catalog again.</p>
-            </article>
-            <article>
-              <h3>Real masters, not dressed-up files</h3>
-              <p>Suno&apos;s WAV downloads are larger, but the highs are synthetic. We rebuilt the pipeline to restore clarity, depth, and detail.</p>
-            </article>
-            <article>
-              <h3>Producers-first workflow</h3>
-              <p>Queue filters, monitor progress, and ship provenance bundles without leaving the console. No terminals, no guesswork.</p>
-            </article>
-            <article>
-              <h3>Future-proof ownership</h3>
-              <p>Immutable IDs, reproducible loudness notes, and distributor-ready disclosures keep DSPs confident and your releases live.</p>
-            </article>
+          <figure className="image-frame">
+            <Image src="/gumroad-parallel.png" alt="Parallel queueing console" width={1400} height={990} className="media" />
+          </figure>
+        </section>
+
+        <section className="section split reverse" data-scroll="slide">
+          <figure className="image-frame">
+            <Image src="/gumroad-cache.png" alt="Cache and provenance view" width={1400} height={990} className="media" />
+          </figure>
+          <div className="text-stack">
+            <h3>WAV mastering built in</h3>
+            <p>Run matchering with our reference master to transform Suno MP3s into 48 kHz WAVs.</p>
           </div>
         </section>
 
-        <section className="section buy" id="buy" data-animate="rise">
-          <div className="buy-card" data-tilt>
-            <div>
-              <p className="pill">Ready when you are</p>
-              <h2>Download once. Deploy anywhere.</h2>
-              <p>
-                The installer bundles the Electron app, ffmpeg, and the Python WAV helper. Push it to Vercel, Bryce, or your own server and start
-                archiving.
+        <section className="section analysis" id="analysis" data-scroll="rise">
+          <p className="eyebrow">ANALYSIS OF PLATFORM WAV CONVERSION & OUR ENHANCEMENT PROCESS</p>
+          <h2>We proved the Suno&#39;s WAV is a dressed-up MP3 — then built something better.</h2>
+          <div className="analysis-grid">
+            <div className="analysis-copy">
+              {analysisParagraphs.map((text) => (
+                <p key={text}>{text}</p>
+              ))}
+              <ul className="analysis-list">
+                {analysisSteps.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ul>
+              <p className="result">
+                Result: the SunoSavvy WAV restores authentic “psychoacoustic feel,” maintains stereo depth, and outperforms Suno’s pseudo-WAV in both spectral integrity and perception.
               </p>
             </div>
-            <div className="buy-actions">
-              <a className="cta primary large" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
-                Buy on Gumroad
+            <figure className="image-frame tall" data-tilt>
+              <Image src="/gumroad-wav1.png" alt="Spectrogram comparison" width={1200} height={1500} className="media" />
+            </figure>
+          </div>
+        </section>
+
+        <section className="section provenance" id="provenance" data-scroll="fade">
+          <div className="section-head">
+            <h2>Provenance</h2>
+            <p>
+              Provenance is important to prove ownership, and now that all major platforms are rolling out AI guardrails, disclosure and ownership is an important step to be taken seriously and to maintain your catalogs integrity. So not only do you get all your tracks, you also get a provenance bundle.
+            </p>
+          </div>
+          <div className="provenance-layout">
+            <div className="bundle-list">
+              <p className="bundle-label">It contains (For each track):</p>
+              <ul>
+                {provenanceItems.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <figure className="image-frame" data-tilt>
+              <Image src="/gumroad-wav2.png" alt="Provenance artifacts" width={1200} height={1500} className="media" />
+            </figure>
+          </div>
+        </section>
+
+        <section className="section importance" data-scroll="rise">
+          <div className="section-head">
+            <h2>Why this is important</h2>
+          </div>
+          <ul className="importance-list">
+            {importanceItems.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="section tldr" id="story" data-scroll="fade">
+          <div className="section-head">
+            <h2>TL;DR Why SunoSavvy?</h2>
+          </div>
+          <div className="tldr-copy">
+            {tldrParagraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
+
+        <section className="section final-cta" data-scroll="rise">
+          <div className="cta-panel" data-tilt>
+            <div>
+              <p className="eyebrow">Download Free</p>
+              <h3>Archive now, keep receipts forever.</h3>
+              <p>Name a fair price: $0+ · Limited availability · 100 left</p>
+            </div>
+            <div className="cta-row">
+              <a className="cta primary" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
+                I want this!
               </a>
-              <p className="micro">Universal installer · macOS · Windows · Linux</p>
+              <a className="cta ghost" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
+                View on Gumroad
+              </a>
             </div>
           </div>
         </section>
       </main>
 
       <footer>
-        <div>
-          <strong>SunoSavvy</strong>
-          <p>Made for producers who need provenance, not chaos.</p>
-        </div>
-        <div>
-          <a href="mailto:support@sunodownloader.app">Support</a>
-          <a href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
-            Buy
-          </a>
-          <span>Deploys beautifully on Vercel or Bryce-hosted servers.</span>
-        </div>
+        <p>© {new Date().getFullYear()} SunoSavvy · Hosted on Vercel</p>
+        <a href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
+          Gumroad Listing
+        </a>
       </footer>
     </div>
   );
@@ -235,7 +235,7 @@ export default function HomePage() {
 
 function useScrollMicroFx() {
   useEffect(() => {
-    const animateItems = document.querySelectorAll<HTMLElement>('[data-animate]');
+    const animateItems = document.querySelectorAll<HTMLElement>('[data-scroll]');
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -244,20 +244,19 @@ function useScrollMicroFx() {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.25 }
     );
     animateItems.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    const progress = document.querySelector<HTMLElement>('.nav-progress');
-    if (!progress) return;
+    const root = document.documentElement;
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const ratio = docHeight > 0 ? scrollY / docHeight : 0;
-      progress.style.setProperty('--progress', ratio.toString());
+      root.style.setProperty('--scroll-depth', ratio.toFixed(4));
     };
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -270,8 +269,8 @@ function useScrollMicroFx() {
       const rect = card.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width;
       const y = (event.clientY - rect.top) / rect.height;
-      card.style.setProperty('--tilt-x', `${(y - 0.5) * -12}deg`);
-      card.style.setProperty('--tilt-y', `${(x - 0.5) * 12}deg`);
+      card.style.setProperty('--tilt-x', `${(y - 0.5) * -10}deg`);
+      card.style.setProperty('--tilt-y', `${(x - 0.5) * 10}deg`);
     };
 
     const cleanup = cards.map((card) => {

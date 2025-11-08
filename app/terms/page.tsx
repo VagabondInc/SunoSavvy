@@ -16,7 +16,7 @@ export default function TermsPage() {
           <p className="eyebrow">Terms of Service</p>
           <h1>Use SunoSavvy responsibly.</h1>
           <p>
-            By downloading or running SunoSavvy you accept the terms below. This tool is provided by VOMG (Los Angeles, CA) to mirror your Suno Studio creations, and it
+            By downloading or running SunoSavvy you accept the terms below. This tool is provided by VOMG (Los Angeles, CA) to mirror your Suno creations, and it
             never transfers ownership of your songs—your rights remain unchanged no matter how many exports you make.
           </p>
         </section>
@@ -24,7 +24,7 @@ export default function TermsPage() {
         <section className="legal-section">
           <h2>Service scope</h2>
           <p>
-            The desktop app operates entirely on your computer. It only talks to Suno’s public APIs (or the same endpoints the Studio UI uses) and writes files directly to your
+            The desktop app operates entirely on your computer. It only talks to Suno’s public APIs (or the same endpoints the Suno UI uses) and writes files directly to your
             drives. There are no VOMG servers that process, store, or distribute your music. SunoSavvy does not upload anything to VOMG or share your data with third
             parties beyond what you already authorize through Suno.
           </p>

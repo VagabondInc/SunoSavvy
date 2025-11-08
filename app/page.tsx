@@ -15,20 +15,20 @@ const featureTexts = [
     body: 'Each song gets its prompts, lyrics, and a signed receipt so you can prove ownership later without hunting screenshots.'
   },
   {
-    title: 'Filters mirror Studio',
-    body: 'Pick liked, owned, stems, and personas before the sync begins so you never dig through Suno again.'
+    title: 'Filters mirror Suno',
+    body: 'Pick liked, owned, personas, and playlists before the sync begins so you never dig through Suno again.'
   }
 ];
 
 const analysisParagraphs = [
   'SunoSavvy exists because we are creators who have seen platforms shut doors without warning. UDIO users lost miles of work; I want that never to happen to the music you poured time into.',
-  'The app mirrors a full Studio session—audio, lyrics, prompts, provenance—so you can stop hoping Suno will keep your queue alive and rely on a local copy instead.',
+  'The app mirrors your Suno library—audio, lyrics, prompts, provenance—so you can stop hoping Suno will keep your queue alive and rely on a local copy instead.',
   'Everything runs on your machine. You authenticate once, choose the personas or playlists that matter, and SunoSavvy takes over from there without a single remote server touching your files.'
 ];
 
 const analysisSteps = [
   'Phase 1 – Connect & detect: Authenticate with Suno and let the app inspect every generation before any copying starts.',
-  'Phase 2 – Filter what matters: Use the filter grid shown in the hero screenshot to grab personas, stems, or playlists once and forever.',
+  'Phase 2 – Filter what matters: Use the filter grid shown in the hero screenshot to grab personas or playlists once and forever.',
   'Phase 3 – Archive forever: Export WAV, MP3, prompts, lyrics, and provenance packets straight to the drives you control.'
 ];
 
@@ -58,7 +58,7 @@ const tldrParagraphs = [
 const directoryScreenshots = [
   {
     title: 'Top-level directory',
-    body: 'The root folder is the mirror of your Suno Studio—everything lands inside the drive you point it to, visible in the top-level directory screenshot above.',
+    body: 'The root folder is the mirror of your Suno library—everything lands inside the drive you point it to, visible in the top-level directory screenshot above.',
     src: '/top-level-dir.png'
   },
   {
@@ -97,11 +97,11 @@ export default function HomePage() {
       <main className="page-shell">
         <section className="hero" data-scroll="rise" id="top">
           <div className="hero-copy">
-          <p className="eyebrow">SunoSavvy · Local archive</p>
-          <h1>Keep your Suno library on your terms.</h1>
-          <p className="lede">
-            I’m a creator too, so I built this tool to mirror your Studio sessions—audio, prompts, lyrics, provenance—straight to a drive you control. No drama, just files.
-          </p>
+            <p className="eyebrow">SunoSavvy · Local archive</p>
+            <h1>Keep your Suno library on your terms.</h1>
+            <p className="lede">
+              I’m a creator too, so I built this tool to mirror your Suno library—audio, prompts, lyrics, provenance—straight to a drive you control. No drama, just files.
+            </p>
             <div className="price-pill">
               <span className="price-label">Free</span>
               <span className="price-note">Name a fair price: $0+</span>
@@ -141,7 +141,7 @@ export default function HomePage() {
               ))}
             </div>
             <figure className="image-frame">
-              <Image src="/gumroad-filters.png" alt="Studio-perfect filters screenshot" width={1400} height={990} className="media" priority />
+              <Image src="/gumroad-filters.png" alt="Suno filters screenshot" width={1400} height={990} className="media" priority />
             </figure>
           </div>
         </section>
@@ -279,7 +279,7 @@ export default function HomePage() {
             </div>
           </div>
           <p className="rights-note">
-            Your songs stay yours; files flow directly from Suno to your computer just as if you clicked download inside Studio. Nothing touches a VOMG server.
+            Your songs stay yours; files flow directly from Suno to your computer just as if you clicked download inside the Suno app. Nothing touches a VOMG server.
           </p>
         </section>
       </main>

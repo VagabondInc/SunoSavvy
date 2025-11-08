@@ -16,7 +16,7 @@ export default function PrivacyPage() {
           <p className="eyebrow">Privacy policy</p>
           <h1>SunoSavvy keeps your songs local.</h1>
           <p>
-            VOMG (Los Angeles, CA) built this tool so creators can mirror their Suno Studio catalogs without changing the ownership of their music. Your rights, metadata,
+            VOMG (Los Angeles, CA) built this tool so creators can mirror their Suno catalogs without changing the ownership of their music. Your rights, metadata,
             and creative labor stay with you forever; the app only copies the same files that Suno delivers to your device manually.
           </p>
         </section>

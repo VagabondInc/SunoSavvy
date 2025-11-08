@@ -12,7 +12,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: 'SunoSavvy · Suno Downloader',
   description:
-    'SunoSavvy mirrors your Suno Studio library, restores true 48 kHz WAV masters, and ships provenance bundles so you keep what you create.',
+    'SunoSavvy mirrors your Suno library, restores true 48 kHz WAV masters, and ships provenance bundles so you keep what you create.',
   openGraph: {
     title: 'SunoSavvy · Suno Downloader',
     description:

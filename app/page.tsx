@@ -7,54 +7,83 @@ const GUMROAD_URL = 'https://sunoaio.gumroad.com/l/downloader';
 
 const featureTexts = [
   {
-    title: 'Studio-perfect filters',
-    body: 'Toggle Liked, Stems, Non-Commercial, +Owned, Personas, Covers and more with multi-select chips that mirror the Studio tray.'
+    title: 'Local queue',
+    body: 'No accounts, no cloud processing—just every file you choose writing directly into the folder you control.'
   },
   {
-    title: 'Parallel exporting',
-    body: 'Queue begins processing as soon as page one lands. The status grid animates through a 2×2 film strip so you always see progress.'
+    title: 'Provenance packets',
+    body: 'Each song gets its prompts, lyrics, and a signed receipt so you can prove ownership later without hunting screenshots.'
   },
   {
-    title: 'Cache + provenance',
-    body: 'First full pull is cached locally, then we only fetch deltas. Every clip gets TXT notes, sidecar JSON, tagged MP3, and cover art.'
+    title: 'Filters mirror Studio',
+    body: 'Pick liked, owned, stems, and personas before the sync begins so you never dig through Suno again.'
   }
 ];
 
 const analysisParagraphs = [
-  "I knew we had to grab the .WAV files for your songs but the time it takes on Suno is a pain in the ass so, it got me thinking, why does it take so long on Suno in the first place? It's not because they have to summon the magical .WAV fairies from a distant .WAV warehouse to go fetch your .WAV's. It's because they're taking the MP3 and turning it into a .WAV, and if you know anything about audio, that's not good. MP3's are compressed and they lose a lot of data. Anything above 16,000 Hz is pretty much gone forever. Suno did try to make it seem like they're giving you a quality .WAV file, but it's artificial and not even artificial intelligence. I can't blame them though because most other platforms that offer .WAV downloads do the exact same thing. So it's not new. If you've downloaded a .WAV from Suno, then you know the size difference is pretty drastic. For them to store 45 billion 75mb files is a lot different than storing 45 billion 3mb files. So instead of scratching my head or beating it against the wall, trying to download all of the songs in the Suno .WAV format, I figured we could do it better than Suno. And that's exactly what we did!",
-  "The image above is the original MP3 file downloaded from Suno. Below, are the two images of the resampled .WAV's. The one on the left is Suno's, and the one on the right, is our .WAV file. You can see how much cleaner ours is above the 16,000 Hz shelf. Don't believe me? Try for yourself.",
-  'These Spectrogram sweeps showed Suno\'s “WAV” stops cold at ~16 kHz, then overlays faint synthetic highs to fake resolution. We rebuilt the pipeline so the highs are real, not painted on.'
+  'SunoSavvy exists because we are creators who have seen platforms shut doors without warning. UDIO users lost miles of work; I want that never to happen to the music you poured time into.',
+  'The app mirrors a full Studio session—audio, lyrics, prompts, provenance—so you can stop hoping Suno will keep your queue alive and rely on a local copy instead.',
+  'Everything runs on your machine. You authenticate once, choose the personas or playlists that matter, and SunoSavvy takes over from there without a single remote server touching your files.'
 ];
 
 const analysisSteps = [
-  'Signal Analysis: Compared MP3 vs. WAV spectrograms and confirmed identical base data with a 16 kHz shelf.',
-  'Warp-Fill Reconstruction: Used an algorithm that "Healed" the 12–16 kHz harmonics upward with adaptive smoothing to 20 kHz performed in the STFT domain with phase mapping.',
-  'Precision Mastering: Ran the restored file through one of the best open source mastering tools, Matchering, and we use a genre-tuned fine tuned sample as our reference to master the track to -14 LUFS, the standard for streaming platforms like Spotify.',
-  'QA & Delivery: Normalized loudness, kept true 48 kHz / 16-bit fidelity, and validated the new spectrum and enhanced the psychoacoustic feel.'
+  'Phase 1 – Connect & detect: Authenticate with Suno and let the app inspect every generation before any copying starts.',
+  'Phase 2 – Filter what matters: Use the filter grid shown in the hero screenshot to grab personas, stems, or playlists once and forever.',
+  'Phase 3 – Archive forever: Export WAV, MP3, prompts, lyrics, and provenance packets straight to the drives you control.'
 ];
 
 const provenanceItems = [
-  'A public JSON-LD record for the track (schema.org/MusicRecording) with a clear AI-use disclosure plus checksums and a provenance URL—searchable, linkable, and future-proof.',
-  'Embedded WAV/BWF metadata (inside the master WAV): bext (Description, Originator, OriginatorReference, dates, CodingHistory, optional UMID, loudness fields), iXML (NOTE, FILE_UID), and optional aXML/EBUCore with structured human/AI roles and a pointer to your provenance page.',
-  'MP3/ID3 credits mapped to standard frames (TIT2, TPE1, TALB, TSRC, etc.) plus short COMM and TXXXfields for AI_Involvement, Provenance_URL, and toolchain—so distributors and players can read it.',
-  'Cryptographic integrity proofs: file SHA-256 for each deliverable, audio-stream SHA-256 (container-agnostic) for MP3/MP4/WAV, and BWF audio-data MD5 inside the WAV. These let anyone confirm “same audio” even after remuxing.',
-  'Reproducible loudness notes (LUFS/LRA/True Peak) using EBU R128 loudnorm, captured in the sidecar and shown on the page.',
-  'Immutable storage IDs: S3 Object-Lock VersionID for each master and optional IPFS CIDv1—published on the track page.',
-  'Platform-ready disclosure blurbs (Spotify/DistroKid, Bandcamp, YouTube, SoundCloud) that mirror the above in plain language.'
+  'JSON + CSV metadata bundles for catalog systems, including prompts and lyric sheets.',
+  'Signed PDFs that summarize authorship plus prompt/seed history per folder.',
+  'Immutable checksum logs so you can prove every file is the same track you archived.',
+  'Copyright submission packets with ready-to-go attachments for PROs or A&Rs.',
+  'ISRC/ISWC-ready exports so distributors know exactly what they are publishing.'
 ];
 
 const importanceItems = [
-  'Compliance & trust: Streaming platforms are rolling out AI-use disclosures and spam filters; clear credits + structured fields help you avoid false positives and keep releases live.',
-  'Chain-of-custody: Hashes (file + stream) and the embedded BWF MD5 give you verifiable lineage across re-encodes, remuxes, and distributor pipelines.',
-  'Reproducibility: Publishing how loudness was measured makes QC disagreements boring—anyone can re-run the command and match the numbers.',
-  'Immutability: S3 Object Lock and IPFS CIDs make your “golden master” a fixed point in time; if anything changes, the IDs change. That’s tamper-evidence for your catalog.',
-  'DDEX-friendly metadata hygiene: Using standard chunks/frames (bext/iXML/aXML; ID3) means distributors, archivists, and search engines can actually consume your credits and disclosures.'
+  'Self-sovereign storage: your library sits on your drives, untouched by remote shutdowns.',
+  'Transparent provenance: distributors and sync houses get the receipts they need without you chasing screenshots.',
+  'Professional ready: metadata bundles travel with every download so labels, lawyers, or teams can verify authorship instantly.',
+  'Future-proof backups: the audits you perform today are still valid after a re-encode because the checksums never change.',
+  'No secrets shared: the app never uploads your files, and you keep full control over where everything lands.',
+  'Rights stay with you: we only mirror what Suno already gave you, so ownership never transfers when SunoSavvy runs.'
 ];
 
 const tldrParagraphs = [
-  'Because you deserve to keep what you create, and to hear it in its truest form. In the current turbulent climate of the AI music world, nothing feels guaranteed. Platforms rise fast and disappear just as quickly, and I’d hate for what happened to so many UDIO users to ever happen again. All that work, emotion, time, and creative energy... gone overnight.',
-  'That’s why I built SunoSavvy. It’s not just a downloader. It’s a safeguard for your art. It restores clarity, depth, and detail Suno compress away, giving you full-quality masters you actually own.',
-  'Our hearts are with you, UDIO users. I can’t imagine how that felt. I’m just sorry I didn’t release this sooner.'
+  'I made SunoSavvy because the worry of losing entire catalogs kept me up. If you create music, you deserve a mirror that respects your process.',
+  'You can import 1,000 songs and resample 100 of them for free; the one-time unlock keeps the downloader and the WAV exports yours for life.',
+  'If this feels like a sales pitch, it is—because I believe in what we are building together and want to keep your art where it belongs.'
+];
+
+const directoryScreenshots = [
+  {
+    title: 'Top-level directory',
+    body: 'The root folder is the mirror of your Suno Studio—everything lands inside the drive you point it to, visible in the top-level directory screenshot above.',
+    src: '/top-level-dir.png'
+  },
+  {
+    title: 'Track folder layout',
+    body: 'Each song folder keeps the MP3, WAV, lyrics, prompts, and provenance JSON together so the work stays grouped per track.',
+    src: '/track-directory.png'
+  },
+  {
+    title: 'Imports dashboard',
+    body: 'The imports view shows how many songs are queued, how many have been secured, and the folder destinations, as seen in the imports screenshot.',
+    src: '/imports.png'
+  }
+];
+
+const metadataScreenshots = [
+  {
+    title: 'Metadata bundle',
+    body: 'JSON, CSV, and signed PDFs travel with every export, highlighted in the metadata screenshot, so catalogs and distributors stay in sync.',
+    src: '/metadata.png'
+  },
+  {
+    title: 'Sidecar documents',
+    body: 'Sidecar proof of provenance, prompts, and checksums sit next to each WAV—see the folder display in the sidecar screenshot.',
+    src: '/sidecar.png'
+  }
 ];
 
 export default function HomePage() {
@@ -68,11 +97,11 @@ export default function HomePage() {
       <main className="page-shell">
         <section className="hero" data-scroll="rise" id="top">
           <div className="hero-copy">
-            <p className="eyebrow">SunoSavvy · Archive & Provenance</p>
-            <h1>Archive & create provenance in one click.</h1>
-            <p className="lede">
-              Suno Downloader mirrors your complete Studio library, layers filters like +Owned & Personas, and builds a provenance bundle for every clip before you can say “dial in a batch”.
-            </p>
+          <p className="eyebrow">SunoSavvy · Local archive</p>
+          <h1>Keep your Suno library on your terms.</h1>
+          <p className="lede">
+            I’m a creator too, so I built this tool to mirror your Studio sessions—audio, prompts, lyrics, provenance—straight to a drive you control. No drama, just files.
+          </p>
             <div className="price-pill">
               <span className="price-label">Free</span>
               <span className="price-note">Name a fair price: $0+</span>
@@ -82,25 +111,25 @@ export default function HomePage() {
               <a className="cta primary" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
                 I want this!
               </a>
-              <p className="cta-note">SunoSavvy Archive &amp; Provenance + .WAV&#39;s Better than Suno&#39;s</p>
+              <p className="cta-note">SunoSavvy · Archive, provenance, WAV resamples</p>
             </div>
-            <p className="seller">Created by Tyler Jay</p>
+            <p className="seller">Created by Tyler Jay, fellow creator</p>
           </div>
-          <div className="price-card" data-tilt>
-            <p className="eyebrow">Instant digital download</p>
-            <h3>Keep what you create.</h3>
+            <div className="price-card" data-tilt>
+              <p className="eyebrow">Instant digital download</p>
+              <h3>Keep what you create.</h3>
             <p>
-              Download once, keep every stem, and ship provenance proof alongside restored 48 kHz masters. Gumroad handles the unlock; SunoSavvy handles the archive.
+              Download once, keep every stem, and ship provenance proof alongside the restored files. Gumroad handles the unlock; SunoSavvy keeps the archive.
             </p>
-            <a className="cta ghost" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
-              Open Gumroad
-            </a>
-          </div>
+              <a className="cta ghost" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
+                Open Gumroad
+              </a>
+            </div>
         </section>
 
         <section className="section feature-stack" id="features" data-scroll="fade">
           <div className="section-head">
-            <h2>Fast queueing, clean provenance, luxe UI.</h2>
+            <h2>Local queueing, clean provenance, creator-first controls.</h2>
           </div>
           <div className="feature-layout">
             <div className="feature-grid">
@@ -120,7 +149,7 @@ export default function HomePage() {
         <section className="section split" data-scroll="slide">
           <div className="text-stack">
             <h3>Queue every filter. Export while Suno still generates.</h3>
-            <p>Parallel queueing starts as soon as the first page lands, so you aren’t waiting on 17K clips before the downloads flow.</p>
+            <p>Queue control starts at launch. Send 10 songs or 200 songs per pull while respecting Suno's rate limits so you never wait on a stalled queue.</p>
           </div>
           <figure className="image-frame">
             <Image src="/gumroad-parallel.png" alt="Parallel queueing console" width={1400} height={990} className="media" />
@@ -132,14 +161,14 @@ export default function HomePage() {
             <Image src="/gumroad-cache.png" alt="Cache and provenance view" width={1400} height={990} className="media" />
           </figure>
           <div className="text-stack">
-            <h3>WAV mastering built in</h3>
-            <p>Run matchering with our reference master to transform Suno MP3s into 48 kHz WAVs.</p>
+          <h3>Provenance packets in every folder</h3>
+            <p>Every export lands with music prompts, lyrics, and a signed provenance note so you can show the work behind your creations.</p>
           </div>
         </section>
 
         <section className="section analysis" id="analysis" data-scroll="rise">
-          <p className="eyebrow">ANALYSIS OF PLATFORM WAV CONVERSION & OUR ENHANCEMENT PROCESS</p>
-          <h2>We proved the Suno&#39;s WAV is a dressed-up MP3 — then built something better.</h2>
+          <p className="eyebrow">WHY SUNO VAULT KEEPER</p>
+          <h2>Local backups so you never have to wonder if your catalog is still yours.</h2>
           <div className="analysis-grid">
             <div className="analysis-copy">
               {analysisParagraphs.map((text) => (
@@ -150,9 +179,9 @@ export default function HomePage() {
                   <li key={step}>{step}</li>
                 ))}
               </ul>
-              <p className="result">
-                Result: the SunoSavvy WAV restores authentic “psychoacoustic feel,” maintains stereo depth, and outperforms Suno’s pseudo-WAV in both spectral integrity and perception.
-              </p>
+          <p className="result">
+                Result: a complete mirror of your Suno catalog—audio, metadata, provenance—that you can open anytime without a login.
+          </p>
             </div>
             <figure className="image-frame tall" data-tilt>
               <Image src="/gumroad-wav1.png" alt="Spectrogram comparison" width={1200} height={1500} className="media" />
@@ -164,7 +193,7 @@ export default function HomePage() {
           <div className="section-head">
             <h2>Provenance</h2>
             <p>
-              Provenance is important to prove ownership, and now that all major platforms are rolling out AI guardrails, disclosure and ownership is an important step to be taken seriously and to maintain your catalogs integrity. So not only do you get all your tracks, you also get a provenance bundle.
+              The provenance packet is what we hand you so you can prove ownership without emailing support. Everything is generated locally and stays with your tracks.
             </p>
           </div>
           <div className="provenance-layout">
@@ -184,7 +213,7 @@ export default function HomePage() {
 
         <section className="section importance" data-scroll="rise">
           <div className="section-head">
-            <h2>Why this is important</h2>
+            <h2>Why this matters</h2>
           </div>
           <ul className="importance-list">
             {importanceItems.map((item) => (
@@ -193,9 +222,38 @@ export default function HomePage() {
           </ul>
         </section>
 
+        <section className="section directories" data-scroll="fade">
+          <div className="section-head">
+            <h2>What lives on your drives</h2>
+            <p>The new screenshots capture how SunoSavvy mirrors your catalog, then organizes every file, metadata bundle, and provenance note.</p>
+          </div>
+          <div className="directory-grid">
+            {directoryScreenshots.map((shot) => (
+              <article key={shot.title} className="directory-card">
+                <figure className="image-frame">
+                  <Image src={shot.src} alt={shot.title} width={1400} height={990} className="media" />
+                </figure>
+                <h3>{shot.title}</h3>
+                <p>{shot.body}</p>
+              </article>
+            ))}
+          </div>
+          <div className="metadata-grid">
+            {metadataScreenshots.map((shot) => (
+              <article key={shot.title} className="directory-card">
+                <figure className="image-frame">
+                  <Image src={shot.src} alt={shot.title} width={1400} height={990} className="media" />
+                </figure>
+                <h3>{shot.title}</h3>
+                <p>{shot.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="section tldr" id="story" data-scroll="fade">
           <div className="section-head">
-            <h2>TL;DR Why SunoSavvy?</h2>
+            <h2>Creator note</h2>
           </div>
           <div className="tldr-copy">
             {tldrParagraphs.map((paragraph) => (
@@ -220,14 +278,21 @@ export default function HomePage() {
               </a>
             </div>
           </div>
+          <p className="rights-note">
+            Your songs stay yours; files flow directly from Suno to your computer just as if you clicked download inside Studio. Nothing touches a VOMG server.
+          </p>
         </section>
       </main>
 
       <footer>
-        <p>© {new Date().getFullYear()} SunoSavvy · Hosted on Vercel</p>
-        <a href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
-          Gumroad Listing
-        </a>
+        <p>© {new Date().getFullYear()} VOMG · Los Angeles, CA · hello@suno.vision</p>
+        <div className="footer-links">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
+            Gumroad Listing
+          </a>
+        </div>
       </footer>
     </div>
   );

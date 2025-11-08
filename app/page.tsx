@@ -149,7 +149,7 @@ export default function HomePage() {
         <section className="section split" data-scroll="slide">
           <div className="text-stack">
             <h3>Queue every filter. Export while Suno still generates.</h3>
-            <p>Queue control starts at launch. Send 10 songs or 200 songs per pull while respecting Suno's rate limits so you never wait on a stalled queue.</p>
+            <p>Queue control starts at launch. Send 10 songs or 200 songs per pull while respecting Suno&apos;s rate limits so you never wait on a stalled queue.</p>
           </div>
           <figure className="image-frame">
             <Image src="/gumroad-parallel.png" alt="Parallel queueing console" width={1400} height={990} className="media" />

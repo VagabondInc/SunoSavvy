@@ -41,7 +41,7 @@ export default function PrivacyPage() {
         <section className="legal-section">
           <h2>Security & transparency</h2>
           <p>
-            Because the app communicates only with Suno, your security depends on Suno's platform safeguards and the permissions you grant locally. We recommend keeping your
+            Because the app communicates only with Suno, your security depends on Suno&apos;s platform safeguards and the permissions you grant locally. We recommend keeping your
             operating system and Suno account credentials secure. We never transmit your files to the internet on behalf of VOMG, and we have no servers that hold your data.
           </p>
         </section>

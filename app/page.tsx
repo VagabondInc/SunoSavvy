@@ -7,52 +7,19 @@ const GUMROAD_URL = 'https://sunoaio.gumroad.com/l/downloader';
 
 const featureTexts = [
   {
-    title: 'Local queue',
-    body: 'No accounts, no cloud processing—just every file you choose writing directly into the folder you control.'
+    title: 'Filters mirror Suno',
+    body: 'Pick Liked, Personas, Covers, Extensions, Full Songs, Public, and Remasters before the sync begins so you never dig through Suno again.'
   },
   {
     title: 'Provenance packets',
-    body: 'Each song gets its prompts, lyrics, and a signed receipt so you can prove ownership later without hunting screenshots.'
-  },
-  {
-    title: 'Filters mirror Suno',
-    body: 'Pick liked, owned, personas, and playlists before the sync begins so you never dig through Suno again.'
+    body: 'Each song gets prompts, lyrics, and signed receipts so you can prove ownership later without hunting screenshots.'
   }
-];
-
-const analysisParagraphs = [
-  'SunoSavvy exists because we are creators who have seen platforms shut doors without warning. UDIO users lost miles of work; I want that never to happen to the music you poured time into.',
-  'The app mirrors your Suno library—audio, lyrics, prompts, provenance—so you can stop hoping Suno will keep your queue alive and rely on a local copy instead.',
-  'Everything runs on your machine. You authenticate once, choose the personas or playlists that matter, and SunoSavvy takes over from there without a single remote server touching your files.'
-];
-
-const analysisSteps = [
-  'Phase 1 – Connect & detect: Authenticate with Suno and let the app inspect every generation before any copying starts.',
-  'Phase 2 – Filter what matters: Use the filter grid shown in the hero screenshot to grab personas or playlists once and forever.',
-  'Phase 3 – Archive forever: Export WAV, MP3, prompts, lyrics, and provenance packets straight to the drives you control.'
-];
-
-const provenanceItems = [
-  'JSON + CSV metadata bundles for catalog systems, including prompts and lyric sheets.',
-  'Signed PDFs that summarize authorship plus prompt/seed history per folder.',
-  'Immutable checksum logs so you can prove every file is the same track you archived.',
-  'Copyright submission packets with ready-to-go attachments for PROs or A&Rs.',
-  'ISRC/ISWC-ready exports so distributors know exactly what they are publishing.'
-];
-
-const importanceItems = [
-  'Self-sovereign storage: your library sits on your drives, untouched by remote shutdowns.',
-  'Transparent provenance: distributors and sync houses get the receipts they need without you chasing screenshots.',
-  'Professional ready: metadata bundles travel with every download so labels, lawyers, or teams can verify authorship instantly.',
-  'Future-proof backups: the audits you perform today are still valid after a re-encode because the checksums never change.',
-  'No secrets shared: the app never uploads your files, and you keep full control over where everything lands.',
-  'Rights stay with you: we only mirror what Suno already gave you, so ownership never transfers when SunoSavvy runs.'
 ];
 
 const tldrParagraphs = [
   'I made SunoSavvy because the worry of losing entire catalogs kept me up. If you create music, you deserve a mirror that respects your process.',
   'You can import 1,000 songs and resample 100 of them for free; the one-time unlock keeps the downloader and the WAV exports yours for life.',
-  'If this feels like a sales pitch, it is—because I believe in what we are building together and want to keep your art where it belongs.'
+  'The library stays local and never touches any VOMG server—files flow from Suno to your computer and end there.'
 ];
 
 const directoryScreenshots = [
@@ -111,20 +78,21 @@ export default function HomePage() {
               <a className="cta primary" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
                 I want this!
               </a>
-              <p className="cta-note">SunoSavvy · Archive, provenance, WAV resamples</p>
+              <p className="cta-note">Archive, provenance, WAV resamples for your Suno library</p>
             </div>
             <p className="seller">Created by Tyler Jay, fellow creator</p>
           </div>
-            <div className="price-card" data-tilt>
-              <p className="eyebrow">Instant digital download</p>
-              <h3>Keep what you create.</h3>
+          <div className="price-card" data-tilt>
+            <p className="eyebrow">Instant digital download</p>
+            <h3>Keep what you create.</h3>
             <p>
-              Download once, keep every stem, and ship provenance proof alongside the restored files. Gumroad handles the unlock; SunoSavvy keeps the archive.
+              Download once, keep every song, and save provenance proof alongside every saved song. The library stays local and never touches any servers—it goes straight
+              from Suno to your computer.
             </p>
-              <a className="cta ghost" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
-                Open Gumroad
-              </a>
-            </div>
+            <a className="cta ghost" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
+              Open Gumroad
+            </a>
+          </div>
         </section>
 
         <section className="section feature-stack" id="features" data-scroll="fade">
@@ -146,80 +114,14 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="section split" data-scroll="slide">
-          <div className="text-stack">
-            <h3>Queue every filter. Export while Suno still generates.</h3>
-            <p>Queue control starts at launch. Send 10 songs or 200 songs per pull while respecting Suno&apos;s rate limits so you never wait on a stalled queue.</p>
-          </div>
-          <figure className="image-frame">
-            <Image src="/gumroad-parallel.png" alt="Parallel queueing console" width={1400} height={990} className="media" />
-          </figure>
-        </section>
-
         <section className="section split reverse" data-scroll="slide">
           <figure className="image-frame">
             <Image src="/gumroad-cache.png" alt="Cache and provenance view" width={1400} height={990} className="media" />
           </figure>
           <div className="text-stack">
-          <h3>Provenance packets in every folder</h3>
-            <p>Every export lands with music prompts, lyrics, and a signed provenance note so you can show the work behind your creations.</p>
+            <h3>Library stays local</h3>
+            <p>When Suno downloads a song, SunoSavvy mirrors that download to your selected folder. No VOMG server ever sees those files.</p>
           </div>
-        </section>
-
-        <section className="section analysis" id="analysis" data-scroll="rise">
-          <p className="eyebrow">WHY SUNO VAULT KEEPER</p>
-          <h2>Local backups so you never have to wonder if your catalog is still yours.</h2>
-          <div className="analysis-grid">
-            <div className="analysis-copy">
-              {analysisParagraphs.map((text) => (
-                <p key={text}>{text}</p>
-              ))}
-              <ul className="analysis-list">
-                {analysisSteps.map((step) => (
-                  <li key={step}>{step}</li>
-                ))}
-              </ul>
-          <p className="result">
-                Result: a complete mirror of your Suno catalog—audio, metadata, provenance—that you can open anytime without a login.
-          </p>
-            </div>
-            <figure className="image-frame tall" data-tilt>
-              <Image src="/gumroad-wav1.png" alt="Spectrogram comparison" width={1200} height={1500} className="media" />
-            </figure>
-          </div>
-        </section>
-
-        <section className="section provenance" id="provenance" data-scroll="fade">
-          <div className="section-head">
-            <h2>Provenance</h2>
-            <p>
-              The provenance packet is what we hand you so you can prove ownership without emailing support. Everything is generated locally and stays with your tracks.
-            </p>
-          </div>
-          <div className="provenance-layout">
-            <div className="bundle-list">
-              <p className="bundle-label">It contains (For each track):</p>
-              <ul>
-                {provenanceItems.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <figure className="image-frame" data-tilt>
-              <Image src="/gumroad-wav2.png" alt="Provenance artifacts" width={1200} height={1500} className="media" />
-            </figure>
-          </div>
-        </section>
-
-        <section className="section importance" data-scroll="rise">
-          <div className="section-head">
-            <h2>Why this matters</h2>
-          </div>
-          <ul className="importance-list">
-            {importanceItems.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
         </section>
 
         <section className="section directories" data-scroll="fade">

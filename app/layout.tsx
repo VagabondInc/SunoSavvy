@@ -15,8 +15,7 @@ export const metadata: Metadata = {
     'SunoSavvy mirrors your Suno library, restores true 48 kHz WAV masters, and ships provenance bundles so you keep what you create.',
   openGraph: {
     title: 'SunoSavvy · Suno Downloader',
-    description:
-      'Archive every Suno stem with Apple-inspired polish, built-in WAV mastering, and provenance you can trust.',
+    description: 'Archive every Suno stem with built-in WAV mastering and provenance you can trust.',
     url: 'https://sunoaio.gumroad.com/l/downloader'
   }
 };

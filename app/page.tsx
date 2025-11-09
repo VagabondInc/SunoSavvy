@@ -69,14 +69,9 @@ export default function HomePage() {
             <p className="lede">
               I’m a creator too, so I built this tool to mirror your Suno library—audio, prompts, lyrics, provenance—straight to a drive you control. No drama, just files.
             </p>
-            <div className="price-pill">
-              <span className="price-label">Free</span>
-              <span className="price-note">Name a fair price: $0+</span>
-            </div>
-            <p className="inventory">Limited availability · 100 left</p>
             <div className="cta-row">
               <a className="cta primary" href={GUMROAD_URL} target="_blank" rel="noopener noreferrer">
-                I want this!
+                Get it for free
               </a>
               <p className="cta-note">Archive, provenance, WAV resamples for your Suno library</p>
             </div>

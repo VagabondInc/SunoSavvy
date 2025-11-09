@@ -116,7 +116,7 @@ export default function HomePage() {
 
         <section className="section split reverse" data-scroll="slide">
           <figure className="image-frame">
-            <Image src="/gumroad-cache.png" alt="Cache and provenance view" width={1400} height={990} className="media" />
+            <Image src="/feature-queue.png" alt="Queue dashboard view" width={1400} height={990} className="media" />
           </figure>
           <div className="text-stack">
             <h3>Library stays local</h3>
